@@ -1,0 +1,94 @@
+using System;
+using System.Collections.Generic;
+
+namespace GroceryListApp
+{
+    class Program
+    {
+        static List<string> groceryList = new List<string>();
+
+        static void Main(string[] args)
+        {
+            bool running = true;
+
+            while (running)
+            {
+                Console.WriteLine("\n--- Grocery List Manager ---");
+                Console.WriteLine("1. Add Item");
+                Console.WriteLine("2. Remove Item");
+                Console.WriteLine("3. View List");
+                Console.WriteLine("4. Clear List");
+                Console.WriteLine("5. Exit");
+                Console.Write("Choose an option (1-5): ");
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        AddItem();
+                        break;
+                    case "2":
+                        RemoveItem();
+                        break;
+                    case "3":
+                        ViewList();
+                        break;
+                    case "4":
+                        ClearList();
+                        break;
+                    case "5":
+                        running = false;
+                        Console.WriteLine("Goodbye!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
+        }
+
+        static void AddItem()
+        {
+            Console.Write("Enter the item to add: ");
+            string item = Console.ReadLine();
+            groceryList.Add(item);
+            Console.WriteLine($"'{item}' added to the list.");
+        }
+
+        static void RemoveItem()
+        {
+            Console.Write("Enter the item to remove: ");
+            string item = Console.ReadLine();
+            if (groceryList.Remove(item))
+            {
+                Console.WriteLine($"'{item}' removed from the list.");
+            }
+            else
+            {
+                Console.WriteLine($"Item '{item}' not found in the list.");
+            }
+        }
+
+        static void ViewList()
+        {
+            Console.WriteLine("\nCurrent Grocery List:");
+            if (groceryList.Count == 0)
+            {
+                Console.WriteLine("(The list is empty)");
+            }
+            else
+            {
+                for (int i = 0; i < groceryList.Count; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {groceryList[i]}");
+                }
+            }
+        }
+
+        static void ClearList()
+        {
+            groceryList.Clear();
+            Console.WriteLine("Grocery list cleared.");
+        }
+    }
+}
